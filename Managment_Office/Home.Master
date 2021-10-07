@@ -1,0 +1,118 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.master.cs" Inherits="Managment_Office.Home" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+  
+      <meta charset="UTF-8" />
+      <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+      <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'/>
+      <title>
+    كلية العلوم
+      </title>	
+	  <link rel="icon" href="img/i.png" />
+	  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+      <link rel="stylesheet" href="css/bootstrap.min.css" />
+      <link rel="stylesheet" href="css/bootstrap-rtl.css" />
+      <link rel="stylesheet" href="css/font-awesome.min.css" />
+      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="css/hover.css" media='all' />
+      <link rel='stylesheet' href='css/animate.css' media='all'/>
+      
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        .dropdown-menu li a{color:black !important;padding:6px !important;
+        }
+        .nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
+            background-color: #0c0b52;
+            border-color: #337ab7;
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="form1" runat="server">
+    <div>
+        <nav class="navbar navbar-fixed-top">
+            <a href="Login.aspx" style="float:left;color:white;margin:27px 9px;font-size:16px" >تسجيل الخروج<img src="img/logout1.png" width="21px" style="margin:0px 2px;" height="21px"></a> 
+	<div class="container">
+		<a class="inactive" class="active" href="MainPage.aspx">
+            <img src="img/logo2.png" style="float: left;width: 90px;height: 70px;margin:3px 0"/>
+		</a>
+
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">        
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>      
+		</div>
+		<span class="sr-only">Toggle navigation</span>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">                    
+			<li><a href="MainPage.aspx" class="active">الرئيسية</a></li>
+			<li><a href="reports.aspx" class="inactive">التقارير</a></li>
+            <%if (Session["role"] != null)
+    {
+        if (Session["role"].ToString() == "Admin")
+        { %>
+      <li class="dropdown">
+      <a class="dropdown-toggle inactive" data-toggle="dropdown" href="#">
+      DashBoard <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="ConfirmDeleting.aspx">تأكيد الحذف</a></li>
+        <li><a href="AddUser.aspx">أضافة مستخدم </a></li>              
+      </ul>
+    </li>
+      <%}
+          }
+          else { Response.Redirect("Login.aspx"); } %>
+		</ul>
+             <a href="#"><img src="img/i.png" alt="sohag" style="float: right;width: 90px;height: 70px;margin:3px 0"/></a>
+         </div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+	</nav>
+	<!--End Navbar-->
+	<!--Start Form Image-->
+	    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        <section class="footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 ">	
+					<p class="text-center">جميع الحقوق محفوظة لوحدة البرمجيات - مركز الخدمات الالكترونيه - جامعة سوهاج</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end footer -->
+    <!-- start loading page--> 
+   <%-- <section class="loading-overlay">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </section>--%>
+    <!-- end loading page--> 
+    <!-- start scroll top--> 
+    <div id="scroll-top">
+        <i class="fa fa-angle-up hvr-grow"></i>
+    </div>
+  
+
+    </div>
+      
+    </form>
+     
+    <asp:ContentPlaceHolder ID="script" runat="server">
+
+    </asp:ContentPlaceHolder>
+  </body>
+</html>

@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="sciencedbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="export">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="exportPlaceName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="folders_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="folder_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="import">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="importname" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="managementByan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="byanData" Type="nvarchar(max)" />
+          <Property Name="DateImport" Type="datetime" />
+          <Property Name="ImportPlace" Type="nvarchar(max)" />
+          <Property Name="DateExport" Type="datetime" />
+          <Property Name="ExportPlace" Type="nvarchar(max)" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="imageSrc" Type="nvarchar(max)" />
+          <Property Name="impoertId" Type="int" />
+          <Property Name="exportId" Type="int" />
+          <Property Name="IsClosed" Type="bit" />
+          <Property Name="notices" Type="nvarchar(max)" />
+          <Property Name="Isdeleted" Type="bit" />
+          <Property Name="file_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="qta3Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="qta3_ID" Type="int" />
+          <Property Name="folder_id" Type="int" />
+          <Property Name="name_applicant" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="qt3at">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="userss">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="sciencedbModelStoreContainer">
+          <EntitySet Name="export" EntityType="Self.export" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="folders_table" EntityType="Self.folders_table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="import" EntityType="Self.import" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="managementByan" EntityType="Self.managementByan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="qt3at" EntityType="Self.qt3at" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userss" EntityType="Self.userss" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sciencedbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="export">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="exportPlaceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="folders_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="folder_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="import">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="importname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="managementByan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="byanData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateImport" Type="DateTime" Precision="3" />
+          <Property Name="ImportPlace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateExport" Type="DateTime" Precision="3" />
+          <Property Name="ExportPlace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="imageSrc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="impoertId" Type="Int32" />
+          <Property Name="exportId" Type="Int32" />
+          <Property Name="IsClosed" Type="Boolean" />
+          <Property Name="notices" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Isdeleted" Type="Boolean" />
+          <Property Name="file_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="qta3Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="qta3_ID" Type="Int32" />
+          <Property Name="folder_id" Type="Int32" />
+          <Property Name="name_applicant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="qt3at">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="userss">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="sciencedbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="exports" EntityType="Self.export" />
+          <EntitySet Name="folders_table" EntityType="Self.folders_table" />
+          <EntitySet Name="imports" EntityType="Self.import" />
+          <EntitySet Name="managementByans" EntityType="Self.managementByan" />
+          <EntitySet Name="qt3at" EntityType="Self.qt3at" />
+          <EntitySet Name="usersses" EntityType="Self.userss" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sciencedbModelStoreContainer" CdmEntityContainer="sciencedbEntities">
+          <EntitySetMapping Name="exports">
+            <EntityTypeMapping TypeName="sciencedbModel.export">
+              <MappingFragment StoreEntitySet="export">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="exportPlaceName" ColumnName="exportPlaceName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="folders_table">
+            <EntityTypeMapping TypeName="sciencedbModel.folders_table">
+              <MappingFragment StoreEntitySet="folders_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="folder_Name" ColumnName="folder_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imports">
+            <EntityTypeMapping TypeName="sciencedbModel.import">
+              <MappingFragment StoreEntitySet="import">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="importname" ColumnName="importname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="managementByans">
+            <EntityTypeMapping TypeName="sciencedbModel.managementByan">
+              <MappingFragment StoreEntitySet="managementByan">
+                <ScalarProperty Name="name_applicant" ColumnName="name_applicant" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="byanData" ColumnName="byanData" />
+                <ScalarProperty Name="DateImport" ColumnName="DateImport" />
+                <ScalarProperty Name="ImportPlace" ColumnName="ImportPlace" />
+                <ScalarProperty Name="DateExport" ColumnName="DateExport" />
+                <ScalarProperty Name="ExportPlace" ColumnName="ExportPlace" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="imageSrc" ColumnName="imageSrc" />
+                <ScalarProperty Name="impoertId" ColumnName="impoertId" />
+                <ScalarProperty Name="exportId" ColumnName="exportId" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+                <ScalarProperty Name="notices" ColumnName="notices" />
+                <ScalarProperty Name="Isdeleted" ColumnName="Isdeleted" />
+                <ScalarProperty Name="file_type" ColumnName="file_type" />
+                <ScalarProperty Name="qta3Name" ColumnName="qta3Name" />
+                <ScalarProperty Name="qta3_ID" ColumnName="qta3_ID" />
+                <ScalarProperty Name="folder_id" ColumnName="folder_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="qt3at">
+            <EntityTypeMapping TypeName="sciencedbModel.qt3at">
+              <MappingFragment StoreEntitySet="qt3at">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usersses">
+            <EntityTypeMapping TypeName="sciencedbModel.userss">
+              <MappingFragment StoreEntitySet="userss">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
