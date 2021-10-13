@@ -57,6 +57,12 @@
                                 <h1 style="text-align:center">البحث</h1>
                             </div>
 							<div class="panel-body">
+                                    <div class="col-xs-12 col-md-12">
+                                        <label class="col-form-label" for="exportno">رقم الصادر</label>
+                                            <asp:DropDownList ID="exportno" runat="server" cssClass="form-control " style="padding:0px" >   </asp:DropDownList>
+                                      <%--      <asp:TextBox ID="xpno_va" runat="server" />--%> <%--TabIndex="14" OnSelectedIndexChanged="SelectedIndexChanged"--%> 
+                                    </div>                                                         
+
                                     <div class="form-group">							 
                                         <div class="col-xs-12 col-md-6">
                                             <label class="col-form-label" for="num">التاريخ من</label>
@@ -66,7 +72,9 @@
                                             <label class="col-form-label" for="num">التاريخ الي</label>
                                             <input type="date" class="form-control" id="date1" runat="server" />
                                         </div>
-                                    </div>
+                                        
+                                    
+                                    
                                     <div class="col-xs-12 col-md-6">
                                         <label class="col-form-label" for="exportddl">جهة الصادر</label>
                                         <asp:DropDownList runat="server" cssClass="form-control " style="padding:0px" ID="exportddl" >
@@ -84,13 +92,8 @@
                                             <input class="form-control" runat="server" id="byantxt" placeholder="بحث بكلمة او اكثر في البيان"/>
 
                                         </div>
-                                 <div class="col-xs-12 col-md-6">
-                                      <div class="col-xs-12 col-md-6">
-                                             <label class="col-form-label" for="byantxt">رقم الصادر</label>
-                                            <input class="form-control" runat="server" id="Text2" placeholder="رقم الصادر"/>
 
-                                        </div>
-                                         
+                                      <div class="col-xs-12 col-md-6">   
                                               <label class="col-form-label" for="Closed"> اسم القطاع  </label>
 									          <asp:DropDownList runat="server" ID="qta3List" cssClass="form-control " style="padding:0px"></asp:DropDownList>	
                                          </div> 
@@ -111,18 +114,17 @@
 									          <input type="radio"   runat="server" style="margin-left: 30px" id="unclose" />
 
                                                     <label class="col-form-label" for="Closed">منتهي أو غير منتهي  </label>
-									          <input type="radio"   runat="server"  id="Radio1" />
+									          <input type="radio"   runat="server"  id="ClUnClosed" />
                                                     </div>
                                                 </div>
-                                         </div>
-                                         
-                                     <div class="col-xs-12 col-md-12">
+                                             </div>
+									          <div class="col-xs-12 col-md-12">
                                         <asp:Button  ID="btnsearch" cssClass=" s2 btn btn-primary" runat="server" Text="بحث" OnClick="btnsearch_Click"></asp:Button>	 		
-                                      </div>
-									
-								
+                                     </div>
+									</div>
+								  </div>
 				    		</div>
-                        </div>                        
+                        </div>                          
 						<div class="panel panel-info  wow bounceInUp" style="margin-top: 50px;" data-wow-duration="2s" data-wow-offset="200">
 							<div class="panel-body">
                                     <div class="form-group text-center">

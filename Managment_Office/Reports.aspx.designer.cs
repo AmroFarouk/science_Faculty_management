@@ -15,6 +15,15 @@ namespace Managment_Office
     {
 
         /// <summary>
+        /// exportno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList exportno;
+
+        /// <summary>
         /// date control.
         /// </summary>
         /// <remarks>
@@ -60,15 +69,6 @@ namespace Managment_Office
         protected global::System.Web.UI.HtmlControls.HtmlInputText byantxt;
 
         /// <summary>
-        /// Text2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text2;
-
-        /// <summary>
         /// qta3List control.
         /// </summary>
         /// <remarks>
@@ -105,13 +105,13 @@ namespace Managment_Office
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton unclose;
 
         /// <summary>
-        /// Radio1 control.
+        /// ClUnClosed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton Radio1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton ClUnClosed;
 
         /// <summary>
         /// btnsearch control.

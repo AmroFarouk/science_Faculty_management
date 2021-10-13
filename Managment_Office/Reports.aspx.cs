@@ -32,7 +32,14 @@ namespace Managment_Office
                 imddl.DataValueField = "id";
                 imddl.DataBind();
                 imddl.Items.Insert(0, string.Empty);
-                
+
+                //Exportid
+                var exportno1 = db.managementByans.ToList();
+                exportno.DataSource = exportno1;
+                exportno.DataTextField = "ID";
+                exportno.DataValueField = "ID";
+                exportno.DataBind();
+                exportno.Items.Insert(0, string.Empty);
 
                 var exportsplaces = db.exports.ToList();
                 exportddl.DataSource = exportsplaces;
@@ -88,8 +95,16 @@ namespace Managment_Office
                 bool isclosed = false;
                 if (Closedr.Checked == true) isclosed = true;
                 else if (unclose.Checked == true) isclosed = false;
-                if (exportddl.SelectedValue != "")
+
+                if (exportno.SelectedValue != "")
                 {
+                    int xpid = int.Parse(exportno.SelectedValue);
+                    //string expno1 = Expno(exportno.SelectedValue);
+                    list = (from f in db.managementByans where f.exportId == xpid && f.Isdeleted == false select f).ToList();
+                }
+
+                if (exportddl.SelectedValue != "")
+                                {
                     int s = int.Parse(exportddl.SelectedValue);
                     list = (from f in db.managementByans where f.exportId == s && f.Isdeleted == false select f).ToList();
                     if (imddl.SelectedValue != "")
@@ -149,8 +164,12 @@ namespace Managment_Office
                     //if (t != null)
                     //{
                     //    foreach (var item in t)
-                        { list = list.Where(a => a.folder_id == (int.Parse(DropDownList1.SelectedValue))&&a.Isdeleted==false).ToList(); }
+                    { list = list.Where(a => a.folder_id == (int.Parse(DropDownList1.SelectedValue)) && a.Isdeleted == false).ToList(); }
                     //}
+                }
+                if (exportno.SelectedValue != "")
+                {
+                    { list = list.Where(a => a.ID == (int.Parse(exportno.SelectedValue)) && a.Isdeleted == false).ToList(); }
                 }
 
             }
