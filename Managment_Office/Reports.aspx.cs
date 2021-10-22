@@ -6,11 +6,12 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace Managment_Office
 {
     public partial class Reports : System.Web.UI.Page
     {
-      public sciencedbEntities db = new sciencedbEntities();
+        public sciencedbEntities db = new sciencedbEntities();
         public List<managementByan> list=new List<managementByan>();
         public DateTime? From,To;
         public static string userRole="";
@@ -35,17 +36,22 @@ namespace Managment_Office
 
                 //Exportid
                 var exportno1 = db.managementByans.ToList();
-                exportno.DataSource = exportno1;
-                exportno.DataTextField = "ID";
-                exportno.DataValueField = "ID";
-                exportno.DataBind();
-                exportno.Items.Insert(0, string.Empty);
+                exportnofrom.DataSource = exportno1;
+                exportnofrom.DataTextField = "ID";
+                exportnofrom.DataValueField = "ID";
+                exportnofrom.DataBind();
+                exportnofrom.Items.Insert(0, string.Empty);
+                exportnoto.DataSource = exportno1;
+                exportnoto.DataTextField = "ID";
+                exportnoto.DataValueField = "ID";
+                exportnoto.DataBind();
+                exportnoto.Items.Insert(0, string.Empty);
 
                 var exportsplaces = db.exports.ToList();
                 exportddl.DataSource = exportsplaces;
                 exportddl.DataTextField = "exportPlaceName";
                 exportddl.DataValueField = "id";
-                 exportddl.DataBind();
+                exportddl.DataBind();
                 exportddl.Items.Insert(0, string.Empty);
 
                 var folds = db.folders_table.ToList();
@@ -90,87 +96,144 @@ namespace Managment_Office
       
         protected void btnsearch_Click(object sender, EventArgs e)
         {
+            
+            
+
             try
             {
+                //https://stackoverflow.com/questions/33304334/linq-and-optional-parameters/33304834
+                int s, import, xpidfrom, xpidto, folderId;
                 bool isclosed = false;
                 if (Closedr.Checked == true) isclosed = true;
                 else if (unclose.Checked == true) isclosed = false;
-
-                if (exportno.SelectedValue != "")
+                IQueryable<managementByan> q = db.managementByans;
+                if (exportnofrom.SelectedValue != "")
                 {
-                    int xpid = int.Parse(exportno.SelectedValue);
-                    //string expno1 = Expno(exportno.SelectedValue);
-                    list = (from f in db.managementByans where f.exportId == xpid && f.Isdeleted == false select f).ToList();
+                    xpidfrom = int.Parse(exportnofrom.SelectedValue);
+                    q = q.Where(f => f.ID >= xpidfrom);
                 }
-
-                if (exportddl.SelectedValue != "")
-                                {
-                    int s = int.Parse(exportddl.SelectedValue);
-                    list = (from f in db.managementByans where f.exportId == s && f.Isdeleted == false select f).ToList();
-                    if (imddl.SelectedValue != "")
-                    {
-                        int import = int.Parse(imddl.SelectedValue);
-                        list = (from f in db.managementByans where f.exportId == s && f.impoertId == import && f.Isdeleted == false select f).ToList();
-                        if (date.Value != "" && date1.Value != "")
-                        {
-                            From = Convert.ToDateTime(date.Value);
-                            To = Convert.ToDateTime(date1.Value);
-                            list = (from f in db.managementByans where ((f.DateExport >= From && f.DateExport <= To) || (f.DateImport >= From && f.DateImport <= To)) && f.exportId == s && f.impoertId == import && f.Isdeleted == false select f).ToList();
-                        }
-                    }
-                    else if (date.Value != "" && date1.Value != "")
-                    {
-                        From = Convert.ToDateTime(date.Value);
-                        To = Convert.ToDateTime(date1.Value);
-                        list = (from f in db.managementByans where ((f.DateExport >= From && f.DateExport <= To) || (f.DateImport >= From && f.DateImport <= To)) && f.exportId == s && f.Isdeleted == false select f).ToList();
-                    }
-                }
-                else if (imddl.SelectedValue != "")
+                if (exportnoto.SelectedValue != "")
                 {
-                    int import = int.Parse(imddl.SelectedValue);
-                    list = (from f in db.managementByans where f.impoertId == import select f).ToList();
-                    if (date.Value != "" && date1.Value != "")
-                    {
-                        From = Convert.ToDateTime(date.Value);
-                        To = Convert.ToDateTime(date1.Value);
-                        list = (from f in db.managementByans where ((f.DateExport >= From && f.DateExport <= To) || (f.DateImport >= From && f.DateImport <= To)) && f.impoertId == import && f.Isdeleted == false select f).ToList();
-                    }
+                    xpidto = int.Parse(exportnoto.SelectedValue);
+                    q = q.Where(f => f.ID <= xpidto);
                 }
-
-
-                else if (exportddl.SelectedValue == "" && imddl.SelectedValue == "" && date.Value != "" && date1.Value != "")
+                if (date.Value != "")
                 {
                     From = Convert.ToDateTime(date.Value);
-                    To = Convert.ToDateTime(date1.Value);
-                    list = (from f in db.managementByans where ((f.DateExport >= From && f.DateExport <= To) || (f.DateImport >= From && f.DateImport <= To)) && f.Isdeleted == false select f).ToList();
-
+                    q = q.Where(f => f.DateExport >= From && f.DateImport >= From);
                 }
-            else list = db.managementByans.Where(a => a.Isdeleted == false).ToList();
-            if (Closedr.Checked || unclose.Checked)
+                if (date1.Value != "")
                 {
-                    list = list.Where(a => a.IsClosed == isclosed).ToList();
+                    To = Convert.ToDateTime(date.Value);
+                    q = q.Where(f => f.DateExport <= To && f.DateImport <= To);
+                }               
+                if (exportddl.SelectedValue != "")
+                {
+                    s = int.Parse(exportddl.SelectedValue);
+                    q = q.Where(f => f.exportId == s );
+                } 
+                if (imddl.SelectedValue != "")
+                {
+                    import = int.Parse(imddl.SelectedValue);
+                    q = q.Where(f => f.impoertId == import);
                 }
                 if (byantxt.Value != "")
-                { list = list.Where(a => a.byanData.Contains(byantxt.Value)&&a.Isdeleted==false).ToList(); }
-                if (qta3List.SelectedValue !="")
+                {
+                    q = q.Where(a => a.byanData.Contains(byantxt.Value));
+                }
+                if (qta3List.SelectedValue != "")
                 {
                     string qta3_name = qta3func(qta3List.SelectedValue);
-                    list = list.Where(a => a.qta3Name == (qta3_name)&&a.Isdeleted==false).ToList();
+                    q =  q.Where(a => a.qta3Name == (qta3_name));
                 }
                 if (DropDownList1.SelectedValue != "")
-                {
+                {   
+                    folderId = int.Parse(DropDownList1.SelectedValue);
                     string items = DropDownList1.SelectedItem.ToString();
-                    //var t = db.folders_table.Where(a => a.folder_Name.Contains(items)).ToList();
-                    //if (t != null)
-                    //{
-                    //    foreach (var item in t)
-                    { list = list.Where(a => a.folder_id == (int.Parse(DropDownList1.SelectedValue)) && a.Isdeleted == false).ToList(); }
-                    //}
+                    var t = db.folders_table.Where(a => a.folder_Name.Contains(items));
+                    if (t != null)
+                    {
+                        foreach (var item in t)
+                        { q = q.Where(a => a.folder_id == folderId); }
+                    }
                 }
-                if (exportno.SelectedValue != "")
+                if (Closedr.Checked || unclose.Checked)
                 {
-                    { list = list.Where(a => a.ID == (int.Parse(exportno.SelectedValue)) && a.Isdeleted == false).ToList(); }
+                    q = q.Where(a => a.IsClosed == isclosed);
                 }
+                q = q.Where(f => f.Isdeleted == false);
+                list = q.ToList();
+                // etc. the other parameters
+
+
+
+                //list = (from f in db.managementByans where ((f.DateExport >= From && f.DateExport <= To) || (f.DateImport >= From && f.DateImport <= To)) && f.exportId == s && f.impoertId == import && f.Isdeleted == false select f).ToList();
+
+                //if (exportddl.SelectedValue != "")
+                //{
+                //    //s = int.Parse(exportddl.SelectedValue);
+                //    list = (from f in db.managementByans where (exportddl.SelectedValue != null && f.exportId == s) && f.Isdeleted == false select f).ToList();
+                //    if (imddl.SelectedValue != "")
+                //    {
+                //        //import = int.Parse(imddl.SelectedValue);
+                //        list = (from f in db.managementByans where f.exportId == s && f.impoertId == import && f.Isdeleted == false select f).ToList();
+                //        if (date.Value != "" && date1.Value != "")
+                //        {
+                //            From = Convert.ToDateTime(date.Value);
+                //            To = Convert.ToDateTime(date1.Value);
+                //            list = (from f in db.managementByans where ((f.DateExport >= From && f.DateExport <= To) || (f.DateImport >= From && f.DateImport <= To)) && f.exportId == s && f.impoertId == import && f.Isdeleted == false select f).ToList();
+                //        }
+                //    }
+                //    else if (date.Value != "" && date1.Value != "")
+                //    {
+                //        From = Convert.ToDateTime(date.Value);
+                //        To = Convert.ToDateTime(date1.Value);
+                //        list = (from f in db.managementByans where ((f.DateExport >= From && f.DateExport <= To) || (f.DateImport >= From && f.DateImport <= To)) && f.exportId == s && f.Isdeleted == false select f).ToList();
+                //    }
+                //}
+                //else if (imddl.SelectedValue != "")
+                //{
+                //    import = int.Parse(imddl.SelectedValue);
+                //    list = (from f in db.managementByans where f.impoertId == import select f).ToList();
+                //    if (date.Value != "" && date1.Value != "")
+                //    {
+                //        From = Convert.ToDateTime(date.Value);
+                //        To = Convert.ToDateTime(date1.Value);
+                //        list = (from f in db.managementByans where ((f.DateExport >= From && f.DateExport <= To) || (f.DateImport >= From && f.DateImport <= To)) && f.impoertId == import && f.Isdeleted == false select f).ToList();
+                //    }
+                //}
+
+
+                //else if (exportddl.SelectedValue == "" && imddl.SelectedValue == "" && date.Value != "" && date1.Value != "")
+                //{
+                //    From = Convert.ToDateTime(date.Value);
+                //    To = Convert.ToDateTime(date1.Value);
+                //    list = (from f in db.managementByans where ((f.DateExport >= From && f.DateExport <= To) || (f.DateImport >= From && f.DateImport <= To)) && f.Isdeleted == false select f).ToList();
+
+                //}
+                //else list = db.managementByans.Where(a => a.Isdeleted == false).ToList();
+                //if (Closedr.Checked || unclose.Checked)
+                //{
+                //    list = list.Where(a => a.IsClosed == isclosed).ToList();
+                //}
+                //if (byantxt.Value != "")
+                //{ list = list.Where(a => a.byanData.Contains(byantxt.Value) && a.Isdeleted == false).ToList(); }
+                //if (qta3List.SelectedValue != "")
+                //{
+                //    string qta3_name = qta3func(qta3List.SelectedValue);
+                //    list = (List<managementByan>)list.Where(a => a.qta3Name == (qta3_name));
+                //}
+                //if (DropDownList1.SelectedValue != "")
+                //{
+                //    string items = DropDownList1.SelectedItem.ToString();
+                //    //var t = db.folders_table.Where(a => a.folder_Name.Contains(items)).ToList();
+                //    //if (t != null)
+                //    //{
+                //    //    foreach (var item in t)
+                //    { list = list.Where(a => a.folder_id == folderId) && a.Isdeleted == false).ToList(); }
+                //    //}
+                //}
+               
 
             }
             catch { }

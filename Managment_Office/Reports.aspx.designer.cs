@@ -15,13 +15,22 @@ namespace Managment_Office
     {
 
         /// <summary>
-        /// exportno control.
+        /// exportnofrom control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList exportno;
+        protected global::System.Web.UI.WebControls.DropDownList exportnofrom;
+
+        /// <summary>
+        /// exportnoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList exportnoto;
 
         /// <summary>
         /// date control.

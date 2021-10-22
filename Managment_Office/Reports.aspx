@@ -1,14 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="Managment_Office.Reports" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css"/>
     
     <style>
         @media print {
             #t td:last-child a {
-                display: none;
+                 display: none;
             }
-            #t td:first-child  {
-                display: none;
-            }
+            /* #t td:first-child  {
+                 display: none;
+            }*/
 
             body {
             background-color:black;}
@@ -57,11 +58,17 @@
                                 <h1 style="text-align:center">البحث</h1>
                             </div>
 							<div class="panel-body">
-                                    <div class="col-xs-12 col-md-12">
-                                        <label class="col-form-label" for="exportno">رقم الصادر</label>
-                                            <asp:DropDownList ID="exportno" runat="server" cssClass="form-control " style="padding:0px" >   </asp:DropDownList>
-                                      <%--      <asp:TextBox ID="xpno_va" runat="server" />--%> <%--TabIndex="14" OnSelectedIndexChanged="SelectedIndexChanged"--%> 
-                                    </div>                                                         
+                                    <div class="col-xs-12 col-md-6">
+                                        <label class="col-form-label" for="exportno">رقم الصادر من:</label>
+                                            <asp:DropDownList ID="exportnofrom" runat="server" cssClass="form-control " style="padding:0px" >   </asp:DropDownList>
+                                     
+                                    </div> 
+                                
+                                    <div class="col-xs-12 col-md-6">
+                                        <label class="col-form-label" for="exportno">رقم الصادر إلي:</label>
+                                            <asp:DropDownList ID="exportnoto" runat="server" cssClass="form-control " style="padding:0px" >   </asp:DropDownList>
+                                      
+                                    </div>
 
                                     <div class="form-group">							 
                                         <div class="col-xs-12 col-md-6">
@@ -150,11 +157,11 @@
                                                      <th>اسم المجلد</th>
                                                     <th>الاسم</th>
                                                     <th>صورة </th>
-                                                 
+                                                    <th></th>
                                                 </tr>
                                              </thead>
                                            <% if (list != null)
-                                               {
+                                              {
                                                    int i = 1;
                                                    foreach (var r in list)
                                                    {
@@ -165,9 +172,8 @@
                                                        {
                                                            var foldname = db.folders_table.Where(a => a.id == r.folder_id).FirstOrDefault();
                                                            fname = foldname.folder_Name;
-                                                       }
-                                               %>
-                                             <tbody>
+                                                       }%>
+                                               <tbody>
                                                <tr>
                                                     <td style="width:6% ;text-align:right"><%=r.ID %></td> 
                                                     <td style="width:10%;text-align:right"><%=r.ExportPlace %></td>
@@ -175,43 +181,42 @@
                                         
                                                     <td style="width:12%;text-align:right"><%=r.byanData %></td>
                                                     <td style="width:7%;text-align:right"><%=d1.ToShortDateString()%></td>
-                                                   <td style="width:7%;text-align:right"><% if (!string.IsNullOrEmpty(r.DateImport.ToString())) {Response.Write( d2.ToShortDateString()); } else { } %></td>
-                                                   <td style="width:7%;text-align:right"><%=r.notices%></td>
-                                                   <td><%=r.qta3Name %></td>
-                                                   <td style="width:10%"><%=r.name_applicant %></td>
-                                                   <td style="width:7%;text-align:right"><%
+                                                    <td style="width:7%;text-align:right"><% if (!string.IsNullOrEmpty(r.DateImport.ToString())) {Response.Write( d2.ToShortDateString()); } else { } %></td>
+                                                    <td style="width:7%;text-align:right"><%=r.notices%></td>
+                                                    <td><%=r.qta3Name %></td>
+                                                    <td style="width:10%"><%=r.name_applicant %></td>
+                                                    <td style="width:7%;text-align:right"><%
                                                                                              if (r.IsClosed == true) Response.Write("منتهي");
                                                                                              else Response.Write("غير منتهي"); %></td>
-                                                   <td style="width:7%;text-align:right">
+                                                    <td style="width:7%;text-align:right">
                                                        <%=fname %>
-                                                   </td>
-                                                   <td style="width:8%;text-align:right"><%=r.user_name %></td>
+                                                    </td>
+                                                    <td style="width:8%;text-align:right"><%=r.user_name %></td>
                                                     <td style="width:12%;text-align:right">
                                                            <%if (r.file_type == "img")
-                                                               { %>
-                                                            <a href="images/<%=r.imageSrc %>" target="_blank">
-                                                              <img src="images/<%=r.imageSrc %>" alt="" style="width: 50px;height: 50px" /></a> 										
-                                                             <%}
-    else if (r.file_type == "pdf")
-    {%>
-                                                                      <p>file Name:<a  target="_blank" href="images/<%=r.imageSrc%>">PDF File</a>
-                                                                        </p>
-                                                                <% }
-    else {%><p></p><% } %>
-                                                       
+                                                             {%>
+                                                                <a href="images/<%=r.imageSrc %>" target="_blank">
+                                                                <img src="images/<%=r.imageSrc %>" alt="" style="width: 50px;height: 50px" /></a> 										
+                                                           <%}
+                                                             else if (r.file_type == "pdf")
+                                                             {%>
+                                                                <p>file Name:<a  target="_blank" href="images/<%=r.imageSrc%>">PDF File</a>
+                                                                </p>
+                                                           <%}
+                                                             else {%><p></p><% } %>
                                                     </td>
                                                    
-                                                   <td style="width:10%" >
+                                                    <td style="width:10%" >
                                                        <a  id='<%=r.ID %>' data-id='<%=r.ID %>'  title="مسح" class="delete"
                                                                   data-placement="top"><img src="img/remove.jpg"  alt="pic" width="20" height="20"/></a>
                                                        <a  href="EditPage.aspx?editId=<%=r.ID%>"  data-toggle="tooltip" title="تعديل"
                                                                   data-placement="top"><img src="img/edit.jpg"  alt="pic" width="30" height="35"/></a>
-                                                   </td>
+                                                    </td>
                                                 </tr>                                               
-                                            </tbody>
-                                            <%i++;
-                                                    }
-                                                }%>
+                                               </tbody>
+                                                    <%i++;
+                                                   }
+                                              }%>
                                         </table>
                                        </div>
                                    </div>
@@ -220,8 +225,8 @@
         			<div>
       			</div>
     		</div>
-                    </div>
-                </div>
+                    
+        </div>
         </section>
 
  <div id="myModal" class="modal fade" role="dialog">
@@ -337,6 +342,6 @@ var span = document.getElementsByClassName("close")[0];
      location.href = location.href;
 
  }
-         </script>
+    </script>
    
 </asp:Content>
