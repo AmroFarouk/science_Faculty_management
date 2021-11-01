@@ -72,40 +72,40 @@
 
                                     <div class="form-group">							 
                                         <div class="col-xs-12 col-md-6">
-                                            <label class="col-form-label" for="num">التاريخ من</label>
+                                            <label class="col-form-label" for="num">التاريخ من:</label>
                                             <input type="date" class="form-control" id="date" runat="server" />
                                         </div>
                                         <div class="col-xs-12 col-md-6">
-                                            <label class="col-form-label" for="num">التاريخ الي</label>
+                                            <label class="col-form-label" for="num">التاريخ الي:</label>
                                             <input type="date" class="form-control" id="date1" runat="server" />
                                         </div>
                                         
                                     
                                     
                                     <div class="col-xs-12 col-md-6">
-                                        <label class="col-form-label" for="exportddl">جهة الصادر</label>
+                                        <label class="col-form-label" for="exportddl">جهة الصادر:</label>
                                         <asp:DropDownList runat="server" cssClass="form-control " style="padding:0px" ID="exportddl" >
                                          </asp:DropDownList>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
-                                        <label class="col-form-label" for="imddl">جهة الوارد</label>
+                                        <label class="col-form-label" for="imddl">جهة الوارد:</label>
                                        <asp:DropDownList runat="server" cssClass="form-control " style="padding:0px" ID="imddl"  >
                                         </asp:DropDownList>
                                     </div>
                                    
 									
                                         <div class="col-xs-12 col-md-6">
-                                             <label class="col-form-label" for="byantxt">البيان</label>
+                                             <label class="col-form-label" for="byantxt">البيان:</label>
                                             <input class="form-control" runat="server" id="byantxt" placeholder="بحث بكلمة او اكثر في البيان"/>
 
                                         </div>
 
                                       <div class="col-xs-12 col-md-6">   
-                                              <label class="col-form-label" for="Closed"> اسم القطاع  </label>
+                                              <label class="col-form-label" for="Closed">اسم القطاع:</label>
 									          <asp:DropDownList runat="server" ID="qta3List" cssClass="form-control " style="padding:0px"></asp:DropDownList>	
                                          </div> 
                                        <div class="col-xs-12 col-md-6">
-                                             <label class="col-form-label" for="TextBox1">اسم المجلد</label>
+                                             <label class="col-form-label" for="TextBox1">اسم المجلد:</label>
                                              <asp:DropDownList runat="server" cssClass="form-control " style="padding:0px;border: 1px solid #980000;" ID="DropDownList1"  >
                                         </asp:DropDownList>
                                          </div>
@@ -114,13 +114,13 @@
                                             <br />
                                             <div class="row">
                                                 <div class="col-md-12 col-xs-12">
-                                              <label class="col-form-label" for="Closed">الموضوع منتهى  </label>
+                                              <label class="col-form-label" for="Closed">الموضوع منتهى</label>
 									          <input type="radio"   runat="server" style="margin-left: 30px" id="Closedr" />	
                                                     
-                                            <label class="col-form-label" for="Closed">الموضوع غير منتهي  </label>
+                                            <label class="col-form-label" for="Closed">الموضوع غير منتهي</label>
 									          <input type="radio"   runat="server" style="margin-left: 30px" id="unclose" />
 
-                                                    <label class="col-form-label" for="Closed">منتهي أو غير منتهي  </label>
+                                                    <label class="col-form-label" for="Closed">منتهي أو غير منتهي</label>
 									          <input type="radio"   runat="server"  id="ClUnClosed" />
                                                     </div>
                                                 </div>

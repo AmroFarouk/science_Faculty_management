@@ -102,50 +102,62 @@ namespace Managment_Office
             try
             {
                 //https://stackoverflow.com/questions/33304334/linq-and-optional-parameters/33304834
+
                 int s, import, xpidfrom, xpidto, folderId;
                 bool isclosed = false;
+
                 if (Closedr.Checked == true) isclosed = true;
                 else if (unclose.Checked == true) isclosed = false;
+
                 IQueryable<managementByan> q = db.managementByans;
+
                 if (exportnofrom.SelectedValue != "")
                 {
                     xpidfrom = int.Parse(exportnofrom.SelectedValue);
                     q = q.Where(f => f.ID >= xpidfrom);
                 }
+
                 if (exportnoto.SelectedValue != "")
                 {
                     xpidto = int.Parse(exportnoto.SelectedValue);
                     q = q.Where(f => f.ID <= xpidto);
                 }
+
                 if (date.Value != "")
                 {
                     From = Convert.ToDateTime(date.Value);
-                    q = q.Where(f => f.DateExport >= From && f.DateImport >= From);
+                    q = q.Where(f => f.DateExport >= From || f.DateImport >= From);
                 }
+
                 if (date1.Value != "")
                 {
-                    To = Convert.ToDateTime(date.Value);
-                    q = q.Where(f => f.DateExport <= To && f.DateImport <= To);
-                }               
+                    To = Convert.ToDateTime(date1.Value);
+                    q = q.Where(f => f.DateExport <= To || f.DateImport <= To);
+                }
+                
                 if (exportddl.SelectedValue != "")
                 {
                     s = int.Parse(exportddl.SelectedValue);
                     q = q.Where(f => f.exportId == s );
-                } 
+                }
+                
                 if (imddl.SelectedValue != "")
                 {
                     import = int.Parse(imddl.SelectedValue);
                     q = q.Where(f => f.impoertId == import);
                 }
+
                 if (byantxt.Value != "")
                 {
                     q = q.Where(a => a.byanData.Contains(byantxt.Value));
                 }
+
                 if (qta3List.SelectedValue != "")
                 {
                     string qta3_name = qta3func(qta3List.SelectedValue);
                     q =  q.Where(a => a.qta3Name == (qta3_name));
                 }
+
                 if (DropDownList1.SelectedValue != "")
                 {   
                     folderId = int.Parse(DropDownList1.SelectedValue);
@@ -157,6 +169,7 @@ namespace Managment_Office
                         { q = q.Where(a => a.folder_id == folderId); }
                     }
                 }
+
                 if (Closedr.Checked || unclose.Checked)
                 {
                     q = q.Where(a => a.IsClosed == isclosed);
